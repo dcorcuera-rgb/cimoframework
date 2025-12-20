@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CIMO Framework - Simple Introduction</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 300;
+        }
+        
+        .intro-section {
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .intro-text {
+            font-size: 1.3em;
+            color: #7f8c8d;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+        
+        .tiers-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .tier-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .tier-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        .tier1-card {
+            border-top: 5px solid #e74c3c;
+        }
+        
+        .tier2-card {
+            border-top: 5px solid #f39c12;
+        }
+        
+        .tier3-card {
+            border-top: 5px solid #27ae60;
+        }
+        
+        .tier-number {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .tier1-number { color: #e74c3c; }
+        .tier2-number { color: #f39c12; }
+        .tier3-number { color: #27ae60; }
+        
+        .tier-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .tier-description {
+            color: #7f8c8d;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .oversight-level {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+        
+        .tier1-level {
+            background: #fdf2f2;
+            color: #e74c3c;
+        }
+        
+        .tier2-level {
+            background: #fef9e7;
+            color: #f39c12;
+        }
+        
+        .tier3-level {
+            background: #f0f9f0;
+            color: #27ae60;
+        }
+        
+        .issue-examples {
+            font-size: 0.9em;
+            color: #95a5a6;
+            font-style: italic;
+        }
+        
+        .flow-arrows {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px 0;
+            font-size: 1.5em;
+            color: #bdc3c7;
+        }
+        
+        .arrow {
+            margin: 0 20px;
+        }
+        
+        .key-principle {
+            background: #f8f9fa;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+        }
+        
+        .key-principle h3 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        
+        .next-steps {
+            background: #2c3e50;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .next-steps h3 {
+            margin-top: 0;
+            font-size: 1.5em;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 10px;
+            transition: background 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            background: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>CIMO Framework</h1>
+            <p>Compliance Issue Management Oversight</p>
+        </div>
+        
+        <div class="intro-section">
+            <div class="intro-text">
+                <strong>Simple Concept:</strong> Different types of compliance issues get different levels of oversight based on their risk and impact.
+            </div>
+            
+            <div class="tiers-overview">
+                <div class="tier-card tier1-card">
+                    <div class="tier-number tier1-number">1</div>
+                    <div class="tier-title">Maximum Oversight</div>
+                    <div class="oversight-level tier1-level">All 10 Controls</div>
+                    <div class="tier-description">
+                        Compliance Impacting High-Rated and Regulatory-Identified Issues
+                    </div>
+                    <div class="issue-examples">
+                        Maximum oversight for highest-risk compliance issues
+                    </div>
+                </div>
+                
+                <div class="tier-card tier2-card">
+                    <div class="tier-number tier2-number">2</div>
+                    <div class="tier-title">Moderate Oversight</div>
+                    <div class="oversight-level tier2-level">6-8 Controls</div>
+                    <div class="tier-description">
+                        Compliance-impacting issues assessed as Customer Impacting, Repeat Issues, and Moderate Issues with 1+ due date extension
+                    </div>
+                    <div class="issue-examples">
+                        Smart oversight with conditional controls
+                    </div>
+                </div>
+                
+                <div class="tier-card tier3-card">
+                    <div class="tier-number tier3-number">3</div>
+                    <div class="tier-title">Basic Oversight</div>
+                    <div class="oversight-level tier3-level">6 Controls</div>
+                    <div class="tier-description">
+                        All remaining Compliance-impacting Issues
+                    </div>
+                    <div class="issue-examples">
+                        Essential oversight with streamlined processes
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flow-arrows">
+                <span>Higher Risk</span>
+                <span class="arrow">→</span>
+                <span>More Oversight</span>
+                <span class="arrow">→</span>
+                <span>Better Control</span>
+            </div>
+        </div>
+        
+        <div class="key-principle">
+            <h3>🎯 Key Principle</h3>
+            <p><strong>Smart Scaling:</strong> Every compliance issue gets proper attention, but we don't waste time over-managing low-risk items. High-risk issues get intensive oversight, while routine issues get efficient processing.</p>
+            
+            <p><strong>Universal Foundation:</strong> All issues receive core oversight (tracking, reporting, governance, escalation, training, quality assurance) regardless of tier.</p>
+        </div>
+        
+        <div style="padding: 30px; text-align: center;">
+            <h3 style="color: #2c3e50; margin-bottom: 20px;">What This Means for You</h3>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0;">
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
+                    <h4 style="color: #e74c3c; margin-top: 0;">If you own a Tier 1 issue:</h4>
+                    <p style="color: #7f8c8d; margin: 0;">Expect regular check-ins, validation requirements, and pre-submission reviews. High support, high accountability.</p>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
+                    <h4 style="color: #f39c12; margin-top: 0;">If you own a Tier 2 issue:</h4>
+                    <p style="color: #7f8c8d; margin: 0;">Standard oversight with potential additional requirements based on issue characteristics (Engineering dependencies, repeat issues).</p>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
+                    <h4 style="color: #27ae60; margin-top: 0;">If you own a Tier 3 issue:</h4>
+                    <p style="color: #7f8c8d; margin: 0;">Streamlined process with essential oversight. Focus on efficient resolution with core compliance requirements.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="next-steps">
+            <h3>Ready to Learn More?</h3>
+            <p>Choose your next step based on what you need:</p>
+            
+            <a href="cimo_process_flow.html" class="cta-button">View Process Flow</a>
+            <a href="cimo_detailed_components.html" class="cta-button">See Detailed Components</a>
+            <a href="cimo_lifecycle_examples.html" class="cta-button">See Lifecycle Examples</a>
+        </div>
+    </div>
+</body>
+</html>
