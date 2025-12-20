@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CIMO Framework - Process Flow</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 300;
+        }
+        
+        .process-container {
+            padding: 40px;
+        }
+        
+        .step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 50px;
+            bottom: -20px;
+            width: 3px;
+            height: 40px;
+            background: #bdc3c7;
+            z-index: 1;
+        }
+        
+        .step-number {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            font-weight: bold;
+            color: white;
+            margin-right: 30px;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step1 .step-number { background: linear-gradient(135deg, #3498db, #2980b9); }
+        .step2 .step-number { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
+        .step3 .step-number { background: linear-gradient(135deg, #e67e22, #d35400); }
+        .step4 .step-number { background: linear-gradient(135deg, #27ae60, #229954); }
+        
+        .step-content {
+            flex: 1;
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .step2 .step-content { border-left-color: #9b59b6; }
+        .step3 .step-content { border-left-color: #e67e22; }
+        .step4 .step-content { border-left-color: #27ae60; }
+        
+        .step-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .step-description {
+            color: #7f8c8d;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .tier-assignment {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .tier-option {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .tier1-option {
+            border-top: 3px solid #e74c3c;
+        }
+        
+        .tier2-option {
+            border-top: 3px solid #f39c12;
+        }
+        
+        .tier3-option {
+            border-top: 3px solid #27ae60;
+        }
+        
+        .tier-label {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .tier1-label { color: #e74c3c; }
+        .tier2-label { color: #f39c12; }
+        .tier3-label { color: #27ae60; }
+        
+        .tier-criteria {
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        
+        .oversight-flow {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .oversight-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .oversight-levels {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .oversight-item {
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            min-width: 120px;
+        }
+        
+        .tier1-oversight {
+            background: #fdf2f2;
+            border: 2px solid #e74c3c;
+        }
+        
+        .tier2-oversight {
+            background: #fef9e7;
+            border: 2px solid #f39c12;
+        }
+        
+        .tier3-oversight {
+            background: #f0f9f0;
+            border: 2px solid #27ae60;
+        }
+        
+        .oversight-number {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .tier1-number { color: #e74c3c; }
+        .tier2-number { color: #f39c12; }
+        .tier3-number { color: #27ae60; }
+        
+        .oversight-label {
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        
+        .flow-arrow {
+            font-size: 1.5em;
+            color: #bdc3c7;
+        }
+        
+        .key-points {
+            background: #e8f5e8;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 5px solid #27ae60;
+            margin-top: 30px;
+        }
+        
+        .key-points h3 {
+            color: #27ae60;
+            margin-top: 0;
+        }
+        
+        .key-points ul {
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+        
+        .navigation {
+            background: #2c3e50;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .nav-button {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 10px;
+            transition: background 0.3s ease;
+        }
+        
+        .nav-button:hover {
+            background: #2980b9;
+        }
+        
+        .nav-button.secondary {
+            background: #95a5a6;
+        }
+        
+        .nav-button.secondary:hover {
+            background: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>CIMO Process Flow</h1>
+            <p>How compliance issues move through the framework</p>
+        </div>
+        
+        <div class="process-container">
+            <div class="step step1">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <div class="step-title">Issue Identification</div>
+                    <div class="step-description">
+                        A compliance issue is identified through various channels: regulatory findings, internal audits, 
+                        self-identification, or ongoing monitoring. The issue enters the CIMO framework for proper oversight.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="step step2">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <div class="step-title">Tier Assignment</div>
+                    <div class="step-description">
+                        Based on the issue characteristics, it's assigned to the appropriate oversight tier. 
+                        This determines the level of CIMO involvement and control requirements.
+                    </div>
+                    <div class="tier-assignment">
+                        <div class="tier-option tier1-option">
+                            <div class="tier-label tier1-label">TIER 1</div>
+                            <div class="tier-criteria">High-rated<br>Regulatory-identified</div>
+                        </div>
+                        <div class="tier-option tier2-option">
+                            <div class="tier-label tier2-label">TIER 2</div>
+                            <div class="tier-criteria">Customer impacting<br>Repeat issues<br>Extended timelines</div>
+                        </div>
+                        <div class="tier-option tier3-option">
+                            <div class="tier-label tier3-label">TIER 3</div>
+                            <div class="tier-criteria">All other<br>compliance issues</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="step step3">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <div class="step-title">Oversight Application</div>
+                    <div class="step-description">
+                        The appropriate CIMO oversight components are applied based on the tier assignment. 
+                        Higher tiers receive more intensive oversight and control mechanisms.
+                    </div>
+                    <div class="oversight-flow">
+                        <div class="oversight-title">Oversight Intensity by Tier</div>
+                        <div class="oversight-levels">
+                            <div class="oversight-item tier1-oversight">
+                                <div class="oversight-number tier1-number">10</div>
+                                <div class="oversight-label">All Components<br>Maximum Control</div>
+                            </div>
+                            <span class="flow-arrow">→</span>
+                            <div class="oversight-item tier2-oversight">
+                                <div class="oversight-number tier2-number">6-8</div>
+                                <div class="oversight-label">Core + Conditional<br>Smart Control</div>
+                            </div>
+                            <span class="flow-arrow">→</span>
+                            <div class="oversight-item tier3-oversight">
+                                <div class="oversight-number tier3-number">6</div>
+                                <div class="oversight-label">Essential Components<br>Efficient Control</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="step step4">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <div class="step-title">Ongoing Management</div>
+                    <div class="step-description">
+                        Throughout the issue lifecycle, CIMO provides the assigned level of oversight including 
+                        monitoring, reporting, quality control, and escalation support until successful resolution.
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-top: 15px;">
+                        <div style="background: white; padding: 15px; border-radius: 8px; text-align: center;">
+                            <div style="font-weight: bold; color: #3498db; margin-bottom: 5px;">📊 Tracking</div>
+                            <div style="font-size: 0.9em; color: #7f8c8d;">SLA monitoring<br>Status updates</div>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 8px; text-align: center;">
+                            <div style="font-weight: bold; color: #9b59b6; margin-bottom: 5px;">📈 Reporting</div>
+                            <div style="font-size: 0.9em; color: #7f8c8d;">Regular visibility<br>Executive updates</div>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 8px; text-align: center;">
+                            <div style="font-weight: bold; color: #e67e22; margin-bottom: 5px;">🔍 Quality</div>
+                            <div style="font-size: 0.9em; color: #7f8c8d;">In-line QA<br>Post-mortem review</div>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 8px; text-align: center;">
+                            <div style="font-weight: bold; color: #f39c12; margin-bottom: 5px;">🔄 Change Management</div>
+                            <div style="font-size: 0.9em; color: #7f8c8d;">Risk acceptance<br>Extensions & modifications</div>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 8px; text-align: center;">
+                            <div style="font-weight: bold; color: #27ae60; margin-bottom: 5px;">⚡ Escalation</div>
+                            <div style="font-size: 0.9em; color: #7f8c8d;">Clear pathways<br>Governance forum</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="key-points">
+            <h3>🎯 Key Process Principles</h3>
+            <ul>
+                <li><strong>Risk-Based Assignment:</strong> Tier assignment drives oversight intensity</li>
+                <li><strong>Consistent Foundation:</strong> All issues get essential oversight regardless of tier</li>
+                <li><strong>Smart Scaling:</strong> Higher-risk issues automatically receive more intensive controls</li>
+                <li><strong>Lifecycle Support:</strong> CIMO involvement continues from identification through resolution</li>
+                <li><strong>Escalation Ready:</strong> Clear pathways for issues that need additional attention</li>
+            </ul>
+        </div>
+        
+        <div class="navigation">
+            <h3>Continue Your Journey</h3>
+            <a href="cimo_simple_intro.html" class="nav-button secondary">← Back to Introduction</a>
+            <a href="cimo_detailed_components.html" class="nav-button">See Detailed Components →</a>
+            <a href="cimo_lifecycle_examples.html" class="nav-button">See Lifecycle Examples →</a>
+        </div>
+    </div>
+</body>
+</html>
