@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CIMO Framework - Detailed Components</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 300;
+        }
+        
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            margin: 20px 0;
+            border-radius: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .legend-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        
+        .applied-icon { background: #27ae60; }
+        .conditional-icon { background: #ffc107; color: #212529; }
+        .not-applied-icon { background: #95a5a6; }
+        
+        .components-overview {
+            padding: 30px;
+        }
+        
+        .component-section {
+            margin-bottom: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .component-header {
+            background: #2c3e50;
+            color: white;
+            padding: 20px 30px;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+        
+        .component-content {
+            padding: 25px 30px;
+        }
+        
+        .component-description {
+            color: #7f8c8d;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 1.1em;
+        }
+        
+        .tier-applications {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .tier-app {
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .tier-app.applied {
+            background: #d5f4e6;
+            border: 2px solid #27ae60;
+        }
+        
+        .tier-app.conditional {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+        }
+        
+        .tier-app.not-applied {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            opacity: 0.7;
+        }
+        
+        .tier-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .tier1-title { color: #e74c3c; }
+        .tier2-title { color: #f39c12; }
+        .tier3-title { color: #27ae60; }
+        
+        .tier-status {
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        
+        .applied .tier-status { color: #27ae60; font-weight: bold; }
+        .conditional .tier-status { color: #856404; font-weight: bold; }
+        .not-applied .tier-status { color: #6c757d; }
+        
+        .tier-note {
+            font-size: 0.85em;
+            font-style: italic;
+            color: #6c757d;
+        }
+        
+        .conditional .tier-note {
+            color: #856404;
+            background: rgba(255, 193, 7, 0.1);
+            padding: 8px;
+            border-radius: 5px;
+        }
+        
+        .cimo-details {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #3498db;
+        }
+        
+        .cimo-details-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+        
+        .cimo-details-content {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .navigation {
+            background: #2c3e50;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .nav-button {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 10px;
+            transition: background 0.3s ease;
+        }
+        
+        .nav-button:hover {
+            background: #2980b9;
+        }
+        
+        .nav-button.secondary {
+            background: #95a5a6;
+        }
+        
+        .nav-button.secondary:hover {
+            background: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>CIMO Framework Components</h1>
+            <p>Detailed breakdown of all oversight components across tiers</p>
+        </div>
+        
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-icon applied-icon">✓</div>
+                <span>Always Applied</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-icon conditional-icon">~</div>
+                <span>Conditionally Applied</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-icon not-applied-icon">✗</div>
+                <span>Not Applied</span>
+            </div>
+        </div>
+        
+        <div class="components-overview">
+            <!-- Component 1 -->
+            <div class="component-section">
+                <div class="component-header">CIMO IM Program Adherence</div>
+                <div class="component-content">
+                    <div class="component-description">
+                        Monitoring and tracking against program requirements for all issues to ensure consistent compliance with enterprise Issue Management standards.
+                    </div>
+                    <div class="cimo-details">
+                        <div class="cimo-details-title">CIMO Implementation:</div>
+                        <div class="cimo-details-content">IM Program SLA Tracking, Status Update Tracking</div>
+                    </div>
+                    <div class="tier-applications">
+                        <div class="tier-app applied">
+                            <div class="tier-title tier1-title">TIER 1</div>
+                            <div class="tier-status">✓ APPLIED</div>
+                            <div class="tier-note">Full SLA monitoring and status tracking</div>
+                        </div>
+                        <div class="tier-app applied">
+                            <div class="tier-title tier2-title">TIER 2</div>
+                            <div class="tier-status">✓ APPLIED</div>
+                            <div class="tier-note">Standard program adherence tracking</div>
+                        </div>
+                        <div class="tier-app applied">
+                            <div class="tier-title tier3-title">TIER 3</div>
+                            <div class="tier-status">✓ APPLIED</div>
+                            <div class="tier-note">Essential program compliance monitoring</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Component 2 -->
+            <div class="component-section">
+                <div class="component-header">CIMO Reporting</div>
+                <div class="component-content">
+                    <div class="component-description">
+                        Reporting to ensure visibility on issues requiring attention through targeted communication to stakeholders and leadership.
+                    </div>
+                    <div class="cimo-details">
+                        <div class="cimo-details-title">CIMO Implementation:</div>
+                        <div class="cimo-details-content">Targeted weekly, monthly, and quarterly reporting on Compliance-impacting issues</div>
+                    </div>
+                    <div class="tier-applications">
+                        <div class="tier-app applied">
+                            <div class="tier-title tier1-title">TIER 1</div>
+                            <div class="tier-status">✓ APPLIED</div>
+                            <div class="tier-note">Enhanced reporting frequency and detail</div>
+                        </div>
+                        <div class="tier-app applied">
+                            <div class="tier-title tier2-title">TIER 2</div>
+                            <div class="tier-status">✓ APPLIED</div>
+                            <div class="tier-note">Regular reporting in standard cycles</div>
+                        </div>
+                        <div class="tier-app applied">
+                            <div class="tier-title tier3-title">TIER 3</div>
+                            <div class="tier-status">✓ APPLIED</div>
+                            <div class="tier-note">Included in aggregate reporting</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Component 3 -->
+            <div class="component-section">
+                <div class="component-header">CIMO Change Governance</div>
+                <div class="component-content">
+                    <div class="component-description">
+                        Central management of risk acceptance, extensions, and select issue/action plan changes to maintain control and consistency.
+                    </div>
+                    <div class="cimo-details">
+                        <div class="cimo-details-title">CIMO Implementation:</div>
+                        <div class="cimo-details-content">Issue and Action Plan Change Management Process, Risk Acceptance Process, Extension Request Process</div>
+                    </div>
+                    <div class="tier-applications">
+                        <div class="tier-app applied">
+                            <div class="tier-title tier1-title">TIER 1</div>
+                            <div class="tier-status">✓ APPLIED</div>
+                            <div class="tier-note">Strict change control and approval processes</div>
+                        </div>
+                        <div class="tier-app applied">
+                            <div class="tier-title tier2-title">TIER 2</div>
+                            <div class="tier-status">✓ APPLIED</div>
+                            <div class="tier-note">Standard change governance processes</div>
+                        </div>
+                        <div class="tier-app applied">
+                            <div class="tier-title tier3-title">TIER 3</div>
+                            <div class="tier-status">✓ APPLIED</div>
+                            <div class="tier-note">Essential change management oversight</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Component 4 -->
+            <div class="component-section">
+                <div class="component-header">CIMO Forum / Escalation Path</div>
+                <div class="component-content">
+                    <div class="component-description">
+                        Clear path to escalate unresolved issues, trends, and key risks through defined governance structures and forums.
+                    </div>
+                    <div class="cimo-details">
+                        <div class="cimo-details-title">CIMO Implementation:</div>
+                        <div class="cimo-details-content">Defined escalation framework by issue tiers, IM Governance Forum</div>
+                    </div>
+                    <div class="tier-applications">
+                        <div class="tier-app applied">
+                            <div class="tier-title tier1-title">TIER 1</div>
+                            <div class="tier-status">✓ APPLIED</div>
+                            <div class="tier-note">Priority escalation pathways available</div>
+                        </div>
+                        <div class="tier-app applied">
+                            <div class="tier-title tier2-title">TIER 2</div>
+                            <div class="tier-status">✓ APPLIED</div>
+                            <div class="tier-note">Standard escalation processes</div>
+                        </div>
+                        <div class="tier-app applied">
+                            <div class="tier-title tier3-title">TIER 3</div>
+                            <div class="tier-status">✓ APPLIED</div>
+                            <div class="tier-note">Basic escalation support available</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Component 5 -->
+            <div class="component-section">
+                <div class="component-header">CIMO Training Completion</div>
+                <div class="component-content">
+                    <div class="component-description">
+                        Ensure staff readiness with enterprise Issue Management training plus role-specific training requirements.
+                    </div>
+                    <div class="cimo-details">
+                        <div class="cimo-details-title">CIMO Implementation:</div>
+                        <div class="cimo-details-content">Role-specific training and training on CIMO requirements</div>
+                    </div>
+                    <div class="tier-applications">
+                        <div class="tier-app applied">
+                            <div class="tier-title tier1-title">TIER 1</div>
+                            <div class="tier-status">✓ APPLIED</div>
+                            <div class="tier-note">Enhanced training requirements and verification</div>
+                        </div>
+                        <div class="tier-app applied">
+                            <div class="tier-title tier2-title">TIER 2</div>
+                            <div class="tier-status">✓ APPLIED</div>
+                            <div class="tier-note">Standard training completion requirements</div>
+                        </div>
+                        <div class="tier-app applied">
+                            <div class="tier-title tier3-title">TIER 3</div>
+                            <div class="tier-status">✓ APPLIED</div>
+                            <div class="tier-note">Basic training requirements</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Component 6 -->
+            <div class="component-section">
+                <div class="component-header">CIMO In-Line QA</div>
+                <div class="component-content">
+                    <div class="component-description">
+                        In-Line quality assurance review by CIMO at select stages and tollgates throughout the issue lifecycle.
+                    </div>
+                    <div class="cimo-details">
+                        <div class="cimo-details-title">CIMO Implementation:</div>
+                        <div class="cimo-details-content">Self-Identified Issue Intake Process (includes Action Plan Development)</div>
+                    </div>
+                    <div class="tier-applications">
+                        <div class="tier-app applied">
+                            <div class="tier-title tier1-title">TIER 1</div>
+                            <div class="tier-status">✓ APPLIED</div>
+                            <div class="tier-note">Comprehensive QA at all key tollgates</div>
+                        </div>
+                        <div class="tier-app applied">
+                            <div class="tier-title tier2-title">TIER 2</div>
+                            <div class="tier-status">✓ APPLIED</div>
+                            <div class="tier-note">Standard in-line QA processes</div>
+                        </div>
+                        <div class="tier-app applied">
+                            <div class="tier-title tier3-title">TIER 3</div>
+                            <div class="tier-status">✓ APPLIED</div>
+                            <div class="tier-note">Essential QA checkpoints</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Component 7 -->
+            <div class="component-section">
+                <div class="component-header">CIMO QC</div>
+                <div class="component-content">
+                    <div class="component-description">
+                        Post-mortem quality control based on sampling for specific program elements to ensure ongoing process improvement.
+                    </div>
+                    <div class="cimo-details">
+                        <div class="cimo-details-title">CIMO Implementation:</div>
+                        <div class="cimo-details-content">Monthly sample of new issues, RCA and Action Plans; monthly sample of closed issues</div>
+                    </div>
+                    <div class="tier-applications">
+                        <div class="tier-app applied">
+                            <div class="tier-title tier1-title">TIER 1</div>
+                            <div class="tier-status">✓ APPLIED</div>
+                            <div class="tier-note">Enhanced sampling and detailed review</div>
+                        </div>
+                        <div class="tier-app applied">
+                            <div class="tier-title tier2-title">TIER 2</div>
+                            <div class="tier-status">✓ APPLIED</div>
+                            <div class="tier-note">Regular sampling for quality control</div>
+                        </div>
+                        <div class="tier-app not-applied">
+                            <div class="tier-title tier3-title">TIER 3</div>
+                            <div class="tier-status">✗ NOT APPLIED</div>
+                            <div class="tier-note">Excluded from post-mortem QC sampling</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Component 8 -->
+            <div class="component-section">
+                <div class="component-header">CIMO 30/60/90 Monitoring</div>
+                <div class="component-content">
+                    <div class="component-description">
+                        Proactive outreach for issues approaching due dates to prevent overdue situations and ensure timely resolution.
+                    </div>
+                    <div class="cimo-details">
+                        <div class="cimo-details-title">CIMO Implementation:</div>
+                        <div class="cimo-details-content">30/60/90 Follow-Up</div>
+                    </div>
+                    <div class="tier-applications">
+                        <div class="tier-app applied">
+                            <div class="tier-title tier1-title">TIER 1</div>
+                            <div class="tier-status">✓ APPLIED</div>
+                            <div class="tier-note">Intensive monitoring with frequent check-ins</div>
+                        </div>
+                        <div class="tier-app applied">
+                            <div class="tier-title tier2-title">TIER 2</div>
+                            <div class="tier-status">✓ APPLIED</div>
+                            <div class="tier-note">Standard 30/60/90 day monitoring</div>
+                        </div>
+                        <div class="tier-app not-applied">
+                            <div class="tier-title tier3-title">TIER 3</div>
+                            <div class="tier-status">✗ NOT APPLIED</div>
+                            <div class="tier-note">No proactive monitoring outreach</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Component 9 -->
+            <div class="component-section">
+                <div class="component-header">CIMO Dependency Validation / Attestation</div>
+                <div class="component-content">
+                    <div class="component-description">
+                        Evidence or attestation from dependent stakeholders regarding prioritization and commitments to ensure accountability.
+                    </div>
+                    <div class="cimo-details">
+                        <div class="cimo-details-title">CIMO Implementation:</div>
+                        <div class="cimo-details-content">CIMO Attestation</div>
+                    </div>
+                    <div class="tier-applications">
+                        <div class="tier-app applied">
+                            <div class="tier-title tier1-title">TIER 1</div>
+                            <div class="tier-status">✓ APPLIED</div>
+                            <div class="tier-note">Required for all stakeholder dependencies</div>
+                        </div>
+                        <div class="tier-app conditional">
+                            <div class="tier-title tier2-title">TIER 2</div>
+                            <div class="tier-status">~ CONDITIONAL</div>
+                            <div class="tier-note">Only where Engineering action plan ownership is required</div>
+                        </div>
+                        <div class="tier-app not-applied">
+                            <div class="tier-title tier3-title">TIER 3</div>
+                            <div class="tier-status">✗ NOT APPLIED</div>
+                            <div class="tier-note">No dependency validation required</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Component 10 -->
+            <div class="component-section">
+                <div class="component-header">CIMO Pre-Validation Challenge</div>
+                <div class="component-content">
+                    <div class="component-description">
+                        CIMO review and challenge of evidence package prior to submission to ensure completeness and quality before final approval.
+                    </div>
+                    <div class="cimo-details">
+                        <div class="cimo-details-title">CIMO Implementation:</div>
+                        <div class="cimo-details-content">Review prior to submission to issue approver (all action plans have been addressed)</div>
+                    </div>
+                    <div class="tier-applications">
+                        <div class="tier-app applied">
+                            <div class="tier-title tier1-title">TIER 1</div>
+                            <div class="tier-status">✓ APPLIED</div>
+                            <div class="tier-note">Mandatory pre-validation review for all submissions</div>
+                        </div>
+                        <div class="tier-app conditional">
+                            <div class="tier-title tier2-title">TIER 2</div>
+                            <div class="tier-status">~ CONDITIONAL</div>
+                            <div class="tier-note">Only for repeat issues in Tier 2</div>
+                        </div>
+                        <div class="tier-app not-applied">
+                            <div class="tier-title tier3-title">TIER 3</div>
+                            <div class="tier-status">✗ NOT APPLIED</div>
+                            <div class="tier-note">No pre-validation challenge required</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="navigation">
+            <h3>Navigate the Framework</h3>
+            <a href="cimo_process_flow.html" class="nav-button secondary">← Back to Process Flow</a>
+            <a href="cimo_simple_intro.html" class="nav-button secondary">← Back to Introduction</a>
+            <a href="cimo_lifecycle_examples.html" class="nav-button">See Lifecycle Examples →</a>
+        </div>
+    </div>
+</body>
+</html>
